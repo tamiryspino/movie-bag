@@ -4,11 +4,16 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pylint = "*"
+pylama = "*"
+pycodestyle = "*"
+autopep8 = "*"
 
 [packages]
 flask = "*"
 flask-mongoengine = "*"
 mongoengine-goodjson = "*"
+flask-restful = "*"
 
 [requires]
 python_version = "3.6"

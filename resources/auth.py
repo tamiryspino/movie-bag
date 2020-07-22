@@ -35,7 +35,7 @@ class LoginApi(Resource):
             user = User.objects.get(email=body.get('email'))
             authorized = user.check_password(body.get('password'))
             if not authorized:
-                return {'error': 'Email or password invalid'}, 401
+                raise UnauthorizedError
 
             expires = datetime.timedelta(days=7)
             access_token = create_access_token(identity=str(user.id),

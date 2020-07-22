@@ -1,14 +1,16 @@
-from flask import request, render_template
-from flask_jwt_extended import create_access_token, decode_token
-from database.models import User
-from flask_restful import Resource
-import datetime
 from resources.errors import (SchemaValidationError, InternalServerError,
                               EmailDoesnotExistsError, BadTokenError,
                               ExpiredTokenError)
+from database.models import User
+
+from flask import request, render_template
+from flask_jwt_extended import create_access_token, decode_token
+from flask_restful import Resource
+import datetime
 from jwt.exceptions import (ExpiredSignatureError, DecodeError,
                             InvalidTokenError)
 from services.mail_service import send_email
+from mongoengine.errors import ValidationError
 
 
 class ForgotPassword(Resource):
@@ -32,16 +34,18 @@ class ForgotPassword(Resource):
                               sender='support@movie-bag.com',
                               recipients=[user.email],
                               text_body=render_template(
-                                         'email/reset_password.txt',
-                                         url=url + reset_token),
+                                  'email/reset_password.txt',
+                                  url=url + reset_token),
                               html_body=render_template(
-                                         'email/reset_password.html',
-                                         url=url + reset_token))
+                                  'email/reset_password.html',
+                                  url=url + reset_token))
+        except ValidationError:
+            raise ValidationError
         except SchemaValidationError:
             raise SchemaValidationError
         except EmailDoesnotExistsError:
             raise EmailDoesnotExistsError
-        except Exception as e:
+        except Exception:
             raise InternalServerError
 
 
@@ -72,6 +76,8 @@ class ResetPassword(Resource):
 
         except SchemaValidationError:
             raise SchemaValidationError
+        except ValidationError:
+            raise ValidationError
         except ExpiredSignatureError:
             raise ExpiredTokenError
         except (DecodeError, InvalidTokenError):

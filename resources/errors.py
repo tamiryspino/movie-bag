@@ -6,6 +6,10 @@ class SchemaValidationError(Exception):
     pass
 
 
+class ValidationError(Exception):
+    pass
+
+
 class MovieAlreadyExistsError(Exception):
     pass
 
@@ -45,6 +49,7 @@ class BadTokenError(Exception):
 class ExpiredTokenError(Exception):
     pass
 
+
 errors = {
     "InternalServerError": {
         "message": "Something went wrong",
@@ -52,6 +57,10 @@ errors = {
     },
     "SchemaValidationError": {
         "message": "Request is missing required fields",
+        "status": 400
+    },
+    "ValidationError": {
+        "message": "Invalid field",
         "status": 400
     },
     "MovieAlreadyExistsError": {

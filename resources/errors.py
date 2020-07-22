@@ -34,6 +34,17 @@ class DoesNotExistError(Exception):
     pass
 
 
+class EmailDoesnotExistsError(Exception):
+    pass
+
+
+class BadTokenError(Exception):
+    pass
+
+
+class ExpiredTokenError(Exception):
+    pass
+
 errors = {
     "InternalServerError": {
         "message": "Something went wrong",
@@ -70,5 +81,17 @@ errors = {
     "DoesNotExistError": {
         "message": "User doesn't exist",
         "status": 401
+    },
+    "EmailDoesnotExistsError": {
+        "message": "Couldn't find the user with given email address",
+        "status": 400
+    },
+    "BadTokenError": {
+        "message": "Invalid token",
+        "status": 403
+    },
+    "ExpiredTokenError": {
+        "message": "Expired token",
+        "status": 403
     }
 }

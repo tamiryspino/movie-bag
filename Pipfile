@@ -16,6 +16,7 @@ mongoengine-goodjson = "*"
 flask-restful = "*"
 flask-bcrypt = "*"
 flask-jwt-extended = "*"
+flask-mail = "*"
 
 [requires]
 python_version = "3.6"

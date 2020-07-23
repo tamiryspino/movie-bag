@@ -1,8 +1,4 @@
-from app import app, api
-from resources.routes import initialize_routes
-from database.db import initialize_db
+from app import app
 
-initialize_db(app)
-initialize_routes(api)
 
 app.run()

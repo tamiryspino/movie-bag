@@ -4,17 +4,9 @@ import json
 from app import app, api
 from database.db import db, initialize_db
 from resources.routes import initialize_routes
+from tests.BaseCase import BaseCase
 
-
-class SignupTest(unittest.TestCase):
-
-    def setUp(self):
-        initialize_db(app)
-        initialize_routes(api)
-
-        self.app = app.test_client()
-        self.db = db.get_db()
-
+class SignupTest(BaseCase):
     def test_successful_signup(self):
         # Given
         payload = json.dumps({
@@ -30,8 +22,3 @@ class SignupTest(unittest.TestCase):
         # Then
         self.assertEqual(str, type(response.json['id']))
         self.assertEqual(200, response.status_code)
-
-    def tearDown(self):
-        # Delete Database collections after the test is complete
-        for collection in self.db.list_collection_names():
-            self.db.drop_collection(collection)

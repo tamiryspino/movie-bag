@@ -5,7 +5,7 @@ from tests.BaseCase import BaseCase
 
 class TestUserLogin(BaseCase):
 
-    def test_successful_login(self):
+    def test_create_movie_with_login(self):
         # Given
         email = "paurakh011@gmail.com"
         password = "mycoolpassword"
@@ -27,6 +27,7 @@ class TestUserLogin(BaseCase):
             "casts": ["Daisy Ridley", "Adam Driver"],
             "genres": ["Fantasy", "Sci-fi"]
         }
+
         # When
         response = self.app.post(
                     '/api/movies',

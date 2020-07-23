@@ -6,11 +6,12 @@ from database.db import db, initialize_db
 from resources.routes import initialize_routes
 from tests.BaseCase import BaseCase
 
+
 class SignupTest(BaseCase):
     def test_successful_signup(self):
         # Given
         payload = json.dumps({
-            "email": "paurakh011@gmail.com",
+            "email": "someone@gmail.com",
             "password": "mycoolpassword"
         })
 

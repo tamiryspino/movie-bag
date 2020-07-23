@@ -2,11 +2,12 @@ import json
 
 from tests.BaseCase import BaseCase
 
+
 class TestUserLogin(BaseCase):
 
     def test_successful_login(self):
         # Given
-        email = "paurakh011@gmail.com"
+        email = "someone@gmail.com"
         password = "mycoolpassword"
         payload = json.dumps({
             "email": email,
